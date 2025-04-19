@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Abah</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fdf6e3;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .card-container {
+      perspective: 1000px;
+      width: 350px;
+      height: 220px;
+      margin: 100px auto;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .card.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-side {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .front {
+      background-color: #ffe4e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #b22222;
+    }
+
+    .back {
+      background-color: #f0fff0;
+      transform: rotateY(180deg);
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card-container">
+  <div class="card" onclick="this.classList.toggle('is-flipped')">
+    <div class="card-side front">
+      Happy Birthday Abah!
+    </div>
+    <div class="card-side back">
+      <p>My old man is 55 today! May Allah shower you with rezk, bounty, a peace of mind, and happiness.</p>
+      <p>I hope everything gets easier for you, and you get to stay active and age gracefully with mama. I hope all of us—your daughters and son—will always be your source of peace and support.</p>
+      <p>I’m happy to see you’re wearing and using better things now, buying things for your hobbies, and for mama. I think everybody would like nice things, especially with family. We just didn’t have the resources back then.</p>
+      <p>I hope we can have more family time, more family activities, and make it a tradition.</p>
+      <p>I’m still coping with a lot at work, but I love my job and my book club is growing. The Starhill acknowledged and invited us to host our book club event at their mall this 1st, and bookstores have also approached me for side gigs.</p>
+      <p>It’s nice to be occupied and surrounded by friends. The whole planning process is so satisfying in the end—we have our own community of readers! It’s never easy, but I feel like I have everything. I get to build my little library, go to my barre pilates, and pick up tennis again.</p>
+      <p>Back then in high school, I begged you to get me a tennis racket and you also bought me a pair of Asics. Looking back, I’m so glad. We might not have been privileged, but maybe we had what we needed.</p>
+      <p>Thank you for investing in all of us siblings. I hope we turned out well, get to live our lives on our own terms, and be kind people.</p>
+      <p>I pray that Allah eases everything for you and mama—financially, emotionally, your wellbeing—so both of you can live your retirement peacefully and tick off all your bucket list wishes.</p>
+      <p>Sending love,<br>
+      Your daughter.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
