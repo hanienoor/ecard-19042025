@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday Abah</title>
 
-  <!-- Google Font for Cursive Style -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
   <style>
@@ -13,32 +12,29 @@
       font-family: Arial, sans-serif;
       background: #fdf6e3;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
       height: 100vh;
       margin: 0;
     }
 
     .card-container {
-      perspective: 1000px;
       width: 90%;
       max-width: 400px;
       height: 600px;
+      perspective: 1200px;
     }
 
     .card {
       width: 100%;
       height: 100%;
       position: relative;
-      -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
-      -webkit-transition: -webkit-transform 0.8s;
-      transition: transform 0.8s;
+      transition: transform 0.8s ease-in-out;
     }
 
     .card.is-flipped {
-      -webkit-transform: rotateY(180deg);
       transform: rotateY(180deg);
     }
 
@@ -46,8 +42,8 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
       border: 2px solid #ccc;
       border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -63,24 +59,24 @@
       align-items: center;
       justify-content: center;
       font-size: 32px;
-      font-weight: normal;
       color: #8b0000;
       font-family: 'Dancing Script', cursive;
+      z-index: 2;
     }
 
     .back {
       background-color: #f0fff0;
-      -webkit-transform: rotateY(180deg);
       transform: rotateY(180deg);
+      z-index: 1;
       font-size: 15px;
       line-height: 1.6;
       color: #333;
     }
 
     .hint {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #666;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #555;
       text-align: center;
     }
   </style>
@@ -107,18 +103,25 @@
     </div>
   </div>
 
-  <div class="hint">Tap to flip the card</div>
+  <div class="hint">Tap the card to flip</div>
 
   <script>
+    const cardContainer = document.getElementById('cardContainer');
     const card = document.getElementById('ecard');
-    const container = document.getElementById('cardContainer');
 
-    function flipCard() {
+    cardContainer.addEventListener('click', function () {
       card.classList.toggle('is-flipped');
-    }
+    });
 
-    container.addEventListener('click', flipCard);
-    container.addEventListener('touchstart', flipCard);
+    // Prevent double-tap zoom on iOS
+    let lastTouch = 0;
+    document.addEventListener('touchstart', function (event) {
+      const now = new Date().getTime();
+      if (now - lastTouch <= 300) {
+        event.preventDefault();
+      }
+      lastTouch = now;
+    }, { passive: false });
   </script>
 
 </body>
