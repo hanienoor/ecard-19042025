@@ -15,6 +15,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
       height: 100vh;
       margin: 0;
     }
@@ -30,11 +31,14 @@
       width: 100%;
       height: 100%;
       position: relative;
+      -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
+      -webkit-transition: -webkit-transform 0.8s;
       transition: transform 0.8s;
     }
 
     .card.is-flipped {
+      -webkit-transform: rotateY(180deg);
       transform: rotateY(180deg);
     }
 
@@ -42,6 +46,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
+      -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       border: 2px solid #ccc;
       border-radius: 15px;
@@ -49,6 +54,7 @@
       box-sizing: border-box;
       overflow-y: auto;
       padding: 20px;
+      background-color: white;
     }
 
     .front {
@@ -64,45 +70,56 @@
 
     .back {
       background-color: #f0fff0;
+      -webkit-transform: rotateY(180deg);
       transform: rotateY(180deg);
       font-size: 15px;
       line-height: 1.6;
       color: #333;
     }
 
-    .card-container:hover .card {
-      cursor: pointer;
+    .hint {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-<div class="card-container" onclick="flipCard()" ontouchstart="flipCard()">
-  <div class="card" id="ecard">
-    <div class="card-side front">
-      Happy Birthday Abah!
-    </div>
-    <div class="card-side back">
-      <p>My old man is 55 today! May Allah shower you with rezk, bounty, a peace of mind, and happiness.</p>
-      <p>I hope everything gets easier for you, and you get to stay active and age gracefully with mama. I hope all of us—your daughters and son—will always be your source of peace and support.</p>
-      <p>I’m happy to see you’re wearing and using better things now, buying things for your hobbies, and for mama. I think everybody would like nice things, especially with family. We just didn’t have the resources back then.</p>
-      <p>I hope we can have more family time, more family activities, and make it a tradition.</p>
-      <p>I’m still coping with a lot at work, but I love my job and my book club is growing. The Starhill acknowledged and invited us to host our book club event at their mall this 1st, and bookstores have also approached me for side gigs.</p>
-      <p>It’s nice to be occupied and surrounded by friends. The whole planning process is so satisfying in the end—we have our own community of readers! It’s never easy, but I feel like I have everything. I get to build my little library, go to my barre pilates, and pick up tennis again.</p>
-      <p>Back then in high school, I begged you to get me a tennis racket and you also bought me a pair of Asics. Looking back, I’m so glad. We might not have been privileged, but maybe we had what we needed.</p>
-      <p>Thank you for investing in all of us siblings. I hope we turned out well, get to live our lives on our own terms, and be kind people.</p>
-      <p>I pray that Allah eases everything for you and mama—financially, emotionally, your wellbeing—so both of you can live your retirement peacefully and tick off all your bucket list wishes.</p>
-      <p>Sending love,<br>
-      Your daughter.</p>
+  <div class="card-container" id="cardContainer">
+    <div class="card" id="ecard">
+      <div class="card-side front">
+        Happy Birthday Abah!
+      </div>
+      <div class="card-side back">
+        <p>My old man is 55 today! May Allah shower you with rezk, bounty, a peace of mind, and happiness.</p>
+        <p>I hope everything gets easier for you, and you get to stay active and age gracefully with mama. I hope all of us—your daughters and son—will always be your source of peace and support.</p>
+        <p>I’m happy to see you’re wearing and using better things now, buying things for your hobbies, and for mama. I think everybody would like nice things, especially with family. We just didn’t have the resources back then.</p>
+        <p>I hope we can have more family time, more family activities, and make it a tradition.</p>
+        <p>I’m still coping with a lot at work, but I love my job and my book club is growing. The Starhill acknowledged and invited us to host our book club event at their mall this 1st, and bookstores have also approached me for side gigs.</p>
+        <p>It’s nice to be occupied and surrounded by friends. The whole planning process is so satisfying in the end—we have our own community of readers! It’s never easy, but I feel like I have everything. I get to build my little library, go to my barre pilates, and pick up tennis again.</p>
+        <p>Back then in high school, I begged you to get me a tennis racket and you also bought me a pair of Asics. Looking back, I’m so glad. We might not have been privileged, but maybe we had what we needed.</p>
+        <p>Thank you for investing in all of us siblings. I hope we turned out well, get to live our lives on our own terms, and be kind people.</p>
+        <p>I pray that Allah eases everything for you and mama—financially, emotionally, your wellbeing—so both of you can live your retirement peacefully and tick off all your bucket list wishes.</p>
+        <p>Sending love,<br>Your daughter.</p>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  function flipCard() {
-    document.getElementById('ecard').classList.toggle('is-flipped');
-  }
-</script>
+  <div class="hint">Tap to flip the card</div>
+
+  <script>
+    const card = document.getElementById('ecard');
+    const container = document.getElementById('cardContainer');
+
+    function flipCard() {
+      card.classList.toggle('is-flipped');
+    }
+
+    container.addEventListener('click', flipCard);
+    container.addEventListener('touchstart', flipCard);
+  </script>
 
 </body>
 </html>
