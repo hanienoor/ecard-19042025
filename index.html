@@ -17,13 +17,14 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      overflow: hidden;
     }
 
     .card-container {
       width: 90%;
       max-width: 400px;
       height: 600px;
-      perspective: 1200px;
+      perspective: 1000px;
     }
 
     .card {
@@ -35,7 +36,7 @@
     }
 
     .card.is-flipped {
-      transform: rotateY(180deg);
+      transform: rotateX(180deg);
     }
 
     .card-side {
@@ -48,8 +49,8 @@
       border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       box-sizing: border-box;
-      overflow-y: auto;
       padding: 20px;
+      overflow-y: auto;
       background-color: white;
     }
 
@@ -61,22 +62,20 @@
       font-size: 32px;
       color: #8b0000;
       font-family: 'Dancing Script', cursive;
-      z-index: 2;
     }
 
     .back {
       background-color: #f0fff0;
-      transform: rotateY(180deg);
-      z-index: 1;
+      transform: rotateX(180deg);
       font-size: 15px;
       line-height: 1.6;
       color: #333;
     }
 
     .hint {
-      margin-top: 12px;
       font-size: 13px;
       color: #555;
+      margin-top: 12px;
       text-align: center;
     }
   </style>
@@ -103,25 +102,26 @@
     </div>
   </div>
 
-  <div class="hint">Tap the card to flip</div>
+  <div class="hint">Swipe up to flip</div>
 
   <script>
-    const cardContainer = document.getElementById('cardContainer');
     const card = document.getElementById('ecard');
+    const container = document.getElementById('cardContainer');
 
-    cardContainer.addEventListener('click', function () {
-      card.classList.toggle('is-flipped');
-    });
+    let startY = 0;
 
-    // Prevent double-tap zoom on iOS
-    let lastTouch = 0;
-    document.addEventListener('touchstart', function (event) {
-      const now = new Date().getTime();
-      if (now - lastTouch <= 300) {
-        event.preventDefault();
+    container.addEventListener('touchstart', function(e) {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    container.addEventListener('touchend', function(e) {
+      const endY = e.changedTouches[0].clientY;
+      const diffY = startY - endY;
+
+      if (diffY > 50) { // Swipe up threshold
+        card.classList.toggle('is-flipped');
       }
-      lastTouch = now;
-    }, { passive: false });
+    });
   </script>
 
 </body>
